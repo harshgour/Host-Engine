@@ -93,23 +93,12 @@ const upload = async (e) => {
       content,
     },
   ];
-<<<<<<< HEAD
   addFile(files)
   async function addFile (files) {
       for await (const result of node.add(files)) {
           console.log(result)
       }
   }
-=======
-
-  async function addFile(files) {
-    for await (const result of window.node.add(files)) {
-      console.log(result);
-    }
-  }
-
-  addFile(files);
->>>>>>> 3b1586c46751c3a97ee6b3b9b6abee3490167f65
 };
 
 document.addEventListener("DOMContentLoaded", async () => {

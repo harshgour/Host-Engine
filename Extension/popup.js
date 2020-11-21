@@ -1,16 +1,14 @@
 const browse = async (e) => {
   e.preventDefault();
-  var cid = await lookupContract.methods
-    .fetchPage(e.target[0].value)
-    .call(
-      { from: "0x0bEA58d399873E67fcf9989AfC0C6A456EC0e922" },
-      function (err, res) {
-        if (err) {
-          console.log(err);
-        }
-        return res || "";
+  var cid = await lookupContract.methods.fetchPage(e.target[0].value).call(
+    { from: "0x0bEA58d399873E67fcf9989AfC0C6A456EC0e922" }, // fetch from metamask
+    function (err, res) {
+      if (err) {
+        console.log(err);
       }
-    );
+      return res || "";
+    }
+  );
   console.log(cid);
   // fetch from ipfs
 };

@@ -74,15 +74,12 @@ const upload = async (e) => {
 
   var file0 = e.target[1].files;
 
-  console.log(file0);
-
   readmultifiles(file0);
 
   var dir = file0[0].webkitRelativePath.split("/");
   dir.pop();
   dir = dir.join("/");
 
-  // console.log(dir);
   await window.node.files.mkdir(`/${dir}`);
 
   function readmultifiles(files) {
@@ -90,8 +87,6 @@ const upload = async (e) => {
 
     function readFile(index, fileData) {
       if (index >= files.length) {
-        console.log(files[0]);
-        console.log(fileData);
         var fileUpload = Object.keys(files).map((item, index) => ({
           path: `/${files[index].webkitRelativePath}`,
           content: fileData[index],
@@ -100,13 +95,22 @@ const upload = async (e) => {
         return;
       }
       var file = files[index];
+
       reader.onload = function (e) {
         var content = e.target.result;
+        if (files[index].type.split("/")[0] === "image") {
+          content = buffer.Buffer(content);
+        }
         fileData.push(content);
         readFile(index + 1, fileData);
       };
-      reader.readAsText(file);
+      if (files[index].type.split("/")[0] === "image") {
+        reader.readAsArrayBuffer(file);
+      } else {
+        reader.readAsText(file);
+      }
     }
+
     readFile(0, []);
   }
 

@@ -80,25 +80,20 @@ const upload = async (e) => {
     content = reader.result;
     console.log(content);
   };
-  // await ipfs.files.mkdir('/'+file0.webkitRelativePath.split('/')[0]);
-  const nodeId = 'ipfs-' + Math.random()
-  const node = await Ipfs.create({ repo: nodeId });
-  console.log("Your node: " + nodeId);
-  window.node = node;
-  const status = node.isOnline() ? "online" : "offline";
-  console.log(`Node status: ${status}`);
   var files = [
     {
       path: file0.webkitRelativePath,
       content,
     },
   ];
+  console.log(window.node);
   addFile(files)
   async function addFile (files) {
-      for await (const result of node.add(files)) {
-          console.log(result)
-      }
-  }
+    // console.log(files)
+    // window.node.add(files[0]);
+    const fileAdded = await window.node.add(files[0])
+    console.log(fileAdded.cid)
+}
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -106,6 +101,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const node = await Ipfs.create({ repo: nodeId });
   console.log("Your node: " + nodeId);
   window.node = node;
+  console.log(node);
   const status = node.isOnline() ? "online" : "offline";
   console.log(`Node status: ${status}`);
 });

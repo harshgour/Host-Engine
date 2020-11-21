@@ -72,7 +72,7 @@
 const upload = async (e) => {
   e.preventDefault();
 
-  var file0 = e.target[0].files;
+  var file0 = e.target[1].files;
 
   readmultifiles(file0);
 
@@ -118,7 +118,7 @@ const upload = async (e) => {
         if (err) {
           console.log(err);
         }
-        return res || "";
+        console.log(res);
       }
     );
   }

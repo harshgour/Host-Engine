@@ -1,5 +1,7 @@
 const browse = async (e) => {
   e.preventDefault();
+
+  // Comment out this code for IPFS testing
   var cid = await lookupContract.methods.fetchPage(e.target[0].value).call(
     { from: "0x7fDB2aA98F957D8db0C0dE8a74471677568e3190" }, // fetch from metamask
     function (err, res) {
@@ -10,7 +12,8 @@ const browse = async (e) => {
     }
   );
   console.log(cid);
-  // fetch from ipfs
+
+  // Fetch from ipfs
 };
 
 document.getElementById("search-form").addEventListener("submit", browse);

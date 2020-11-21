@@ -92,4 +92,21 @@ const upload = async (e) => {
       content,
     },
   ];
+
+  async function addFile(files) {
+    for await (const result of window.node.add(files)) {
+      console.log(result);
+    }
+  }
+
+  addFile(files);
 };
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const nodeId = "ipfs-" + Math.random();
+  const node = await Ipfs.create({ repo: nodeId });
+  console.log("Your node: " + nodeId);
+  window.node = node;
+  const status = node.isOnline() ? "online" : "offline";
+  console.log(`Node status: ${status}`);
+});

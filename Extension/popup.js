@@ -1,15 +1,18 @@
 const browse = async (e) => {
   e.preventDefault();
-  var cid = await lookupContract.methods.fetchPage(e.target[0].value).call(
-    { from: "0x7fDB2aA98F957D8db0C0dE8a74471677568e3190" }, // fetch from metamask
-    function (err, res) {
-      if (err) {
-        console.log(err);
-      }
-      return res || "";
-    }
-  );
-  console.log(cid);
+  // var cid = await lookupContract.methods.fetchPage(e.target[0].value).call(
+  //   { from: "0x7fDB2aA98F957D8db0C0dE8a74471677568e3190" }, // fetch from metamask
+  //   function (err, res) {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     return res || "";
+  //   }
+  // );
+  // console.log(cid);
+  console.log(e.target[0].value)
+  localStorage.setItem('cid',e.target[0].value);
+  window.open("./main.html")
   // fetch from ipfs
 };
 

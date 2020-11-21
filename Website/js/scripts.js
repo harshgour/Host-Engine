@@ -74,6 +74,8 @@ const upload = async (e) => {
 
   var file0 = e.target[1].files;
 
+  console.log(file0);
+
   readmultifiles(file0);
 
   var dir = file0[0].webkitRelativePath.split("/");

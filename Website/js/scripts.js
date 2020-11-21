@@ -86,30 +86,32 @@ const upload = async (e) => {
   function readmultifiles(files) {
     var reader = new FileReader();
 
-    function readFile(index) {
-      if (index >= files.length) return;
+    function readFile(index, fileData) {
+      if (index >= files.length) {
+        console.log(files[0]);
+        console.log(fileData);
+        var fileUpload = Object.keys(files).map((item, index) => ({
+          path: `/${files[index].webkitRelativePath}`,
+          content: fileData[index],
+        }));
+        addFile(fileUpload);
+        return;
+      }
       var file = files[index];
       reader.onload = function (e) {
         var content = e.target.result;
-        var fi = [
-          {
-            path: "/" + files[index].webkitRelativePath,
-            content,
-          },
-        ];
-        addFile(fi);
-        readFile(index + 1);
+        fileData.push(content);
+        readFile(index + 1, fileData);
       };
       reader.readAsText(file);
     }
-    readFile(0);
+    readFile(0, []);
   }
 
   async function addFile(files) {
-    console.log(files);
-    const fileAdded = await window.node.add(files[0]);
-    const cid = fileAdded.cid.string;
-    console.log();
+    const res = await window.node.add(files);
+    console.log(res);
+    const cid = res.cid.string;
 
     var page_name = document.getElementById("input-address").value;
     console.log(cid, page_name);
@@ -135,8 +137,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
   web3.eth.defaultAccount = web3.eth.accounts[0];
-
-  console.log(web3.eth.defaultAccount);
 
   window.lookupContract = new web3.eth.Contract(
     [

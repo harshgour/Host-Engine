@@ -35,14 +35,12 @@
     <link href="css/styles.css" rel="stylesheet" />
     <style>
       .form_ {
-        position: absolute;
-        top: 50%;
+        position: relative;
         left: 50%;
-        margin-top: -100px;
+        margin-top: 100px;
         margin-left: -250px;
         width: 500px;
         height: 300px;
-        
       }
       form p {
         width: 100%;
@@ -55,7 +53,7 @@
         transform: translate(-50%, -50%);
         z-index: -1;
       }
-      .input-folder{
+      .input-folder {
         border: 4px dashed #000;
         height: 200px;
         position: relative;
@@ -153,7 +151,7 @@
     <script src="js/scripts.js"></script>
     <script>
       $(document).ready(function () {
-        $("form input").change(function () {
+        $("form .input-folder input").change(function () {
           $("form p").text(this.files.length + " file(s) selected");
         });
       });

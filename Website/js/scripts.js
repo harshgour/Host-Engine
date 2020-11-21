@@ -109,131 +109,20 @@ const upload = async (e) => {
     console.log(files);
     const fileAdded = await window.node.add(files[0]);
     const cid = fileAdded.cid.string;
+    console.log();
 
     var page_name = document.getElementById("input-address").value;
     console.log(cid, page_name);
-    await lookupContract.methods.addPage(page_name, cid).call(
-      { from: "0x0bEA58d399873E67fcf9989AfC0C6A456EC0e922" }, // fetch from metamask
-      function (err, res) {
-        if (err) {
-          console.log(err);
-        }
-        console.log(res);
-      }
-    );
+    await window.lookupContract.methods
+      .addPage(page_name, cid)
+      .send({
+        from: "0x7fDB2aA98F957D8db0C0dE8a74471677568e3190",
+        gas: 3000000,
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 };
-
-if (typeof web3 !== "undefined") {
-  web3 = new Web3(Web3.currentProvider);
-} else {
-  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-}
-
-web3.eth.defaultAccount = web3.eth.accounts[0];
-
-var lookupContract = new web3.eth.Contract(
-  [
-    {
-      constant: false,
-      inputs: [
-        {
-          name: "name",
-          type: "string",
-        },
-        {
-          name: "cid",
-          type: "string",
-        },
-      ],
-      name: "addPage",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      constant: false,
-      inputs: [
-        {
-          name: "name",
-          type: "string",
-        },
-        {
-          name: "cid",
-          type: "string",
-        },
-      ],
-      name: "updatePage",
-      outputs: [],
-      payable: false,
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "name",
-          type: "string",
-        },
-      ],
-      name: "fetchPage",
-      outputs: [
-        {
-          name: "",
-          type: "string",
-        },
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "",
-          type: "bytes32",
-        },
-      ],
-      name: "pages",
-      outputs: [
-        {
-          name: "owner",
-          type: "address",
-        },
-        {
-          name: "cid",
-          type: "string",
-        },
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function",
-    },
-    {
-      constant: true,
-      inputs: [
-        {
-          name: "source",
-          type: "string",
-        },
-      ],
-      name: "stringToBytes32",
-      outputs: [
-        {
-          name: "result",
-          type: "bytes32",
-        },
-      ],
-      payable: false,
-      stateMutability: "view",
-      type: "function",
-    },
-  ],
-  "0xf1e8Ec2817034CF28C5dDd6B398a3E263bd6E60F"
-);
 
 document.addEventListener("DOMContentLoaded", async () => {
   const nodeId = "ipfs-" + Math.random();
@@ -242,4 +131,113 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.node = node;
   const status = node.isOnline() ? "online" : "offline";
   console.log(`Node status: ${status}`);
+
+  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
+  web3.eth.defaultAccount = web3.eth.accounts[0];
+
+  console.log(web3.eth.defaultAccount);
+
+  window.lookupContract = new web3.eth.Contract(
+    [
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "cid",
+            type: "string",
+          },
+        ],
+        name: "addPage",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        constant: false,
+        inputs: [
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "cid",
+            type: "string",
+          },
+        ],
+        name: "updatePage",
+        outputs: [],
+        payable: false,
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "name",
+            type: "string",
+          },
+        ],
+        name: "fetchPage",
+        outputs: [
+          {
+            name: "",
+            type: "string",
+          },
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "",
+            type: "bytes32",
+          },
+        ],
+        name: "pages",
+        outputs: [
+          {
+            name: "owner",
+            type: "address",
+          },
+          {
+            name: "cid",
+            type: "string",
+          },
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function",
+      },
+      {
+        constant: true,
+        inputs: [
+          {
+            name: "source",
+            type: "string",
+          },
+        ],
+        name: "stringToBytes32",
+        outputs: [
+          {
+            name: "result",
+            type: "bytes32",
+          },
+        ],
+        payable: false,
+        stateMutability: "view",
+        type: "function",
+      },
+    ],
+    "0x5dDBD2c385b7b95660413253811779087Db17E21"
+  );
 });

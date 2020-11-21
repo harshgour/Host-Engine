@@ -1,7 +1,7 @@
 const browse = async (e) => {
   e.preventDefault();
   var cid = await lookupContract.methods.fetchPage(e.target[0].value).call(
-    { from: "0x0bEA58d399873E67fcf9989AfC0C6A456EC0e922" }, // fetch from metamask
+    { from: "0x7fDB2aA98F957D8db0C0dE8a74471677568e3190" }, // fetch from metamask
     function (err, res) {
       if (err) {
         console.log(err);
@@ -123,5 +123,5 @@ var lookupContract = new web3.eth.Contract(
       type: "function",
     },
   ],
-  "0xf1e8Ec2817034CF28C5dDd6B398a3E263bd6E60F"
+  "0x4e9031463F18B3CB7Ebf0F569715CF73564143bF"
 );

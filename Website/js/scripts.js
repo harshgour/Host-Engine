@@ -71,26 +71,39 @@
 
 const upload = async (e) => {
   e.preventDefault();
-  var file0 = e.target[0].files[0];
-  let reader = new FileReader();
-  var content = "";
-
-  reader.readAsText(file0);
-  reader.onload = function () {
-    content = reader.result;
-    console.log(content);
-  };
-  var files = [
-    {
-      path: file0.webkitRelativePath,
-      content,
-    },
-  ];
-  console.log(window.node);
-  addFile(files)
+  var file0 = e.target[0].files;
+  readmultifiles(file0);
+  var dir = file0[0].webkitRelativePath.split('/')
+  dir.pop();
+  dir = dir.join('/');
+  console.log(dir);
+  await window.node.files.mkdir(`/${dir}`);
+  function readmultifiles(files) {
+    var reader = new FileReader();  
+    function readFile(index) {
+      if( index >= files.length ) return;
+      var file = files[index];
+      reader.onload = function(e) {  
+        // get file content  
+        var content = e.target.result;
+        // console.log(bin)
+        // console.log(files[index])
+        var fi = [{
+          path: '/'+files[index].webkitRelativePath,
+          content,
+        }]
+        addFile(fi);
+        // console.log(fi)
+        // do sth with bin
+        readFile(index+1)
+      }
+      reader.readAsText(file);
+    }
+    readFile(0);
+  } 
+  // console.log(f1)
   async function addFile (files) {
-    // console.log(files)
-    // window.node.add(files[0]);
+    console.log(files)
     const fileAdded = await window.node.add(files[0])
     console.log(fileAdded.cid)
 }
@@ -105,3 +118,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   const status = node.isOnline() ? "online" : "offline";
   console.log(`Node status: ${status}`);
 });
+

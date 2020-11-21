@@ -71,7 +71,7 @@
 
 const upload = async (e) => {
   e.preventDefault();
-  var file0 = e.target[0].files[1];
+  var file0 = e.target[0].files[0];
   let reader = new FileReader();
   var content = "";
 
@@ -80,9 +80,10 @@ const upload = async (e) => {
     content = reader.result;
     console.log(content);
   };
-
-  const node = await Ipfs.create();
-  // console.log("Your node: " + nodeId);
+  // await ipfs.files.mkdir('/'+file0.webkitRelativePath.split('/')[0]);
+  const nodeId = 'ipfs-' + Math.random()
+  const node = await Ipfs.create({ repo: nodeId });
+  console.log("Your node: " + nodeId);
   window.node = node;
   const status = node.isOnline() ? "online" : "offline";
   console.log(`Node status: ${status}`);
@@ -92,4 +93,10 @@ const upload = async (e) => {
       content,
     },
   ];
+  addFile(files)
+  async function addFile (files) {
+      for await (const result of node.add(files)) {
+          console.log(result)
+      }
+  }
 };

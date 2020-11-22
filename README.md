@@ -3,7 +3,7 @@
 [3]: https://github.com/khannakshat7/
 
 [1.1]: http://i.imgur.com/9I6NRUm.png (github icon without padding)
-# Host Engine &nbsp;&nbsp; <img src="https://ipfs.io/ipfs/QmP1HxmfZnz5NxxaQxJDqDvgq6yHaNAPEN11ZA8H49motr/" height="30" />
+# Host Engine &nbsp; <img src="https://ipfs.io/ipfs/QmP1HxmfZnz5NxxaQxJDqDvgq6yHaNAPEN11ZA8H49motr/" height="50" />
 
 This is the official github repository for Team Hack-n-Toss for HackSRM 3.0<br/><br/>
 Team members:<br/>

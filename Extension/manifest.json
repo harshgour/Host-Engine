@@ -1,5 +1,5 @@
 {
-    "name": "Hnt-Extension",
+    "name": "Host Engine",
     "version": "1.0",
     "description": "Decentralized Web Hosting",
     "permissions": ["activeTab","declarativeContent", "storage", "tabs"],

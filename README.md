@@ -3,7 +3,7 @@
 [3]: https://github.com/khannakshat7/
 
 [1.1]: http://i.imgur.com/9I6NRUm.png (github icon without padding)
-<p align="center"><img src="https://ipfs.io/ipfs/QmP1HxmfZnz5NxxaQxJDqDvgq6yHaNAPEN11ZA8H49motr/" height="40" /></p>
+<p align="center"><img src="https://ipfs.io/ipfs/QmP1HxmfZnz5NxxaQxJDqDvgq6yHaNAPEN11ZA8H49motr/" height="100" /></p>
 
 # Host Engine 
 

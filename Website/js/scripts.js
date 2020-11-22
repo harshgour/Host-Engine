@@ -127,7 +127,14 @@ const upload = async (e) => {
         from: "0x7fDB2aA98F957D8db0C0dE8a74471677568e3190",
         gas: 3000000,
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        Swal.fire(
+          "Uploaded",
+          `Your Website has been Uploaded view it at ${page_name} in our extension`,
+          "success"
+        );
+      })
       .catch((err) => console.log(err));
   }
 };

@@ -2,6 +2,7 @@ const showData = (data) => {
   document.append(data);
 };
 (async () => {
+  console.log(localStorage.getItem("cid"));
   const node = await Ipfs.create();
   window.node = node;
   const stream = node.cat(localStorage.getItem("cid") + "/index.html");
@@ -17,6 +18,7 @@ const showData = (data) => {
       /<script[^>]+src=\"((?!https).*?)\"[^>]*>(.*?)<\/script>/g,
       /<script[^>]+src=\"((?!https).*?)\"[^>]*\/>/g,
       /<img[^>]+src=\"((?!https).*?)\"[^>]*\/>/g,
+      /<a[^>]+href=\"((?!https).*?)\"[^>]*>(.*?)<\/a>/g,
     ];
 
     var arr = [];

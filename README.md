@@ -7,7 +7,7 @@
 
 # Host Engine 
 
-This is the official github repository for Team Hack-n-Toss for HackSRM 3.0<br/><br/>
+This is the official github repository of Team Hack-n-Toss for HackSRM 3.0<br/><br/>
 Team members:<br/>
 Ahmed Mawia <ahmedmawia.dev@gmail.com> [![alt text][1.1]][2] <br/> 
 Harsh Gour <harshgour57@gmail.com> [![alt text][1.1]][1] <br/>

@@ -18,4 +18,16 @@ The way web hosting works today is by hosting all the web content including text
 We have used IPFS (InterPlanetary File System) to store our website in a peer-to-peer architecture. We have also introduced another system similar to DNS system for people to host their website on. Using this people can directly use name strings to view websites.<br/>
 
 ## Tech Stack
+Frontend Technologies:
+*HTML
+*CSS
+*Javascript
+*Bootstrap
+*Chrome-extension
+Backend Technologies:
+*Ethereum
+*IPFS
+*Blockchain
+*Solidity
+*Web3.js
 
